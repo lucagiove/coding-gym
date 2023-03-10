@@ -1,8 +1,5 @@
-class TicTacToe {
-    private firstPlayerTurn: boolean = true
-    private turn: number = 1
+class Board {
     private board: sign[][] = new Array(3)
-    private winner: 1 | 2 | undefined | null = undefined
 
     constructor() {
         for (let row = 0; row < 3; row++) {
@@ -10,11 +7,26 @@ class TicTacToe {
         }
     }
 
+    getSign(row: number, column: number) {
+        return this.board[row][column]
+    }
+
+    setSign(row: number, column: number, sign: sign){
+        this.board[row][column] = sign
+    }
+}
+
+class TicTacToe {
+    private firstPlayerTurn: boolean = true
+    private board = new Board()
+    private turn: number = 1
+    private winner: 1 | 2 | undefined | null = undefined
+
 
     drawTo(row: number, column: number) {
-        if (this.board[row][column]) throw new Error('Position already used')
+        if (this.board.getSign(row, column)) throw new Error('Position already used')
 
-        this.board[row][column] = this.firstPlayerTurn ? sign.X : sign.O
+        this.board.setSign(row, column, this.firstPlayerTurn ? sign.X : sign.O)
         this.checkWinner()
         this.changeTurn();
     }
@@ -25,7 +37,7 @@ class TicTacToe {
     }
 
     getSign(row: number, column: number) {
-        return this.board[row][column]
+        return this.board.getSign(row, column)
     }
 
     getWinner(): 1 | 2 | undefined | null{
@@ -132,6 +144,7 @@ describe('TicTacToe', function () {
             });
         });
     });
+
     describe('Scenario: All places used with no winner', function () {
         describe('Given players used all but one places', function () {
             // O | X | X |
