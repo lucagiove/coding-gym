@@ -72,13 +72,21 @@ describe('TicTacToe', function () {
             });
         });
     });
-    describe('Given first player with 1 sign in a row', function () {
+    describe('Given first player with 2 sign in a row', function () {
+        // X | O | O |
+        // X |   |   |
+        //   |   |   |
+
         const ticTacToe = new TicTacToe()
         ticTacToe.drawTo(0, 0) // player 1
         ticTacToe.drawTo(0, 1) // player 2
         ticTacToe.drawTo(1, 0) // player 1
         ticTacToe.drawTo(0, 2) // player 2
-        describe('When the first place the 3rd sign in a row', function () {
+        describe('When the first player place the 3rd sign in a row', function () {
+            // X | O | O |
+            // X |   |   |
+            // X |   |   | <-
+
             ticTacToe.drawTo(2, 0) // player 1
 
             it('Then it should win', function () {
@@ -86,7 +94,11 @@ describe('TicTacToe', function () {
             });
         });
     });
-    describe('Given first player with 2 sign in a row', function () {
+    describe('Given the second player with 2 sign in a row', function () {
+        // O | X | X |
+        // O |   |   |
+        //   |   | X |
+
         const ticTacToe = new TicTacToe()
         ticTacToe.drawTo(0, 1) // player 1
         ticTacToe.drawTo(0, 0) // player 2
@@ -94,6 +106,10 @@ describe('TicTacToe', function () {
         ticTacToe.drawTo(1, 0) // player 2
         ticTacToe.drawTo(2, 2) // player 1
         describe('When the second place the 3rd sign in a row', function () {
+            // O | X | X |
+            // O |   |   |
+            // O |   | X | <-
+
             ticTacToe.drawTo(2, 0) // player 2
 
             it('Then it should win', function () {
